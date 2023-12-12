@@ -1,0 +1,279 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "fauxstodian/fauxstodian.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Fauxstodian"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/fauxstodian/api/v1/account": {
+      "post": {
+        "summary": "Create a new vault (PDA).",
+        "operationId": "Fauxstodian_CreateAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fauxstodianCreateAccountRep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fauxstodianCreateAccountReq"
+            }
+          }
+        ],
+        "tags": [
+          "Fauxstodian"
+        ]
+      }
+    },
+    "/fauxstodian/api/v1/balance": {
+      "post": {
+        "summary": "Query for total lamports in a vault.",
+        "operationId": "Fauxstodian_GetBalance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fauxstodianGetBalanceRep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fauxstodianGetBalanceReq"
+            }
+          }
+        ],
+        "tags": [
+          "Fauxstodian"
+        ]
+      }
+    },
+    "/fauxstodian/api/v1/close": {
+      "post": {
+        "summary": "Close a vault account; withdrawing all lamports to the owner.",
+        "operationId": "Fauxstodian_CloseAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fauxstodianCloseAccountRep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fauxstodianCloseAccountReq"
+            }
+          }
+        ],
+        "tags": [
+          "Fauxstodian"
+        ]
+      }
+    },
+    "/fauxstodian/api/v1/transfer": {
+      "post": {
+        "summary": "Change the owner of a vault.",
+        "operationId": "Fauxstodian_TransferOwnership",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fauxstodianTransferOwnershipRep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fauxstodianTransferOwnershipReq"
+            }
+          }
+        ],
+        "tags": [
+          "Fauxstodian"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "fauxstodianCloseAccountRep": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "title": "solana tx signature"
+        }
+      }
+    },
+    "fauxstodianCloseAccountReq": {
+      "type": "object",
+      "properties": {
+        "pda": {
+          "type": "string",
+          "title": "vault record address (pda)"
+        },
+        "owner": {
+          "type": "string",
+          "title": "current owner"
+        }
+      },
+      "title": "Close account"
+    },
+    "fauxstodianCreateAccountRep": {
+      "type": "object",
+      "properties": {
+        "depositAddress": {
+          "type": "string",
+          "title": "the created vault record address (pda)"
+        }
+      }
+    },
+    "fauxstodianCreateAccountReq": {
+      "type": "object",
+      "properties": {
+        "seed": {
+          "type": "string",
+          "title": "seed string (max 32 chars)"
+        },
+        "owner": {
+          "type": "string",
+          "title": "the initial vault owner"
+        }
+      },
+      "title": "Create account"
+    },
+    "fauxstodianGetBalanceRep": {
+      "type": "object",
+      "properties": {
+        "pubKey": {
+          "type": "string",
+          "title": "the account public key (input param)"
+        },
+        "lamports": {
+          "type": "string",
+          "format": "uint64",
+          "title": "the account balance"
+        }
+      }
+    },
+    "fauxstodianGetBalanceReq": {
+      "type": "object",
+      "properties": {
+        "pubKey": {
+          "type": "string",
+          "title": "the account public key to get balance for"
+        }
+      },
+      "title": "Get balance"
+    },
+    "fauxstodianTransferOwnershipRep": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "title": "solana tx signature"
+        }
+      }
+    },
+    "fauxstodianTransferOwnershipReq": {
+      "type": "object",
+      "properties": {
+        "pda": {
+          "type": "string",
+          "title": "vault record address (pda)"
+        },
+        "owner": {
+          "type": "string",
+          "title": "current owner"
+        },
+        "newOwner": {
+          "type": "string",
+          "title": "new owner"
+        }
+      },
+      "title": "Transfer ownership"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

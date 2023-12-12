@@ -1,0 +1,17 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    - selector: fauxstodian.Fauxstodian.CreateAccount
+      post: /fauxstodian/api/v1/account
+      body: "*"
+    - selector: fauxstodian.Fauxstodian.GetBalance
+      post: /fauxstodian/api/v1/balance
+      body: "*"
+    - selector: fauxstodian.Fauxstodian.TransferOwnership
+      post: /fauxstodian/api/v1/transfer
+      body: "*"
+    - selector: fauxstodian.Fauxstodian.CloseAccount
+      post: /fauxstodian/api/v1/close
+      body: "*"
