@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "fauxstodian/fauxstodian.proto",
+    "title": "fauxstodian/v1/fauxstodian.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "Fauxstodian"
+      "name": "FauxstodianService"
     }
   ],
   "consumes": [
@@ -19,12 +19,12 @@
     "/fauxstodian/api/v1/account": {
       "post": {
         "summary": "Create a new vault (PDA).",
-        "operationId": "Fauxstodian_CreateAccount",
+        "operationId": "FauxstodianService_CreateAccount",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/fauxstodianCreateAccountRep"
+              "$ref": "#/definitions/v1CreateAccountResponse"
             }
           },
           "default": {
@@ -40,24 +40,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/fauxstodianCreateAccountReq"
+              "$ref": "#/definitions/v1CreateAccountRequest"
             }
           }
         ],
         "tags": [
-          "Fauxstodian"
+          "FauxstodianService"
         ]
       }
     },
     "/fauxstodian/api/v1/balance": {
       "post": {
         "summary": "Query for total lamports in a vault.",
-        "operationId": "Fauxstodian_GetBalance",
+        "operationId": "FauxstodianService_GetBalance",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/fauxstodianGetBalanceRep"
+              "$ref": "#/definitions/v1GetBalanceResponse"
             }
           },
           "default": {
@@ -73,24 +73,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/fauxstodianGetBalanceReq"
+              "$ref": "#/definitions/v1GetBalanceRequest"
             }
           }
         ],
         "tags": [
-          "Fauxstodian"
+          "FauxstodianService"
         ]
       }
     },
     "/fauxstodian/api/v1/close": {
       "post": {
         "summary": "Close a vault account; withdrawing all lamports to the owner.",
-        "operationId": "Fauxstodian_CloseAccount",
+        "operationId": "FauxstodianService_CloseAccount",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/fauxstodianCloseAccountRep"
+              "$ref": "#/definitions/v1CloseAccountResponse"
             }
           },
           "default": {
@@ -106,24 +106,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/fauxstodianCloseAccountReq"
+              "$ref": "#/definitions/v1CloseAccountRequest"
             }
           }
         ],
         "tags": [
-          "Fauxstodian"
+          "FauxstodianService"
         ]
       }
     },
     "/fauxstodian/api/v1/transfer": {
       "post": {
         "summary": "Change the owner of a vault.",
-        "operationId": "Fauxstodian_TransferOwnership",
+        "operationId": "FauxstodianService_TransferOwnership",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/fauxstodianTransferOwnershipRep"
+              "$ref": "#/definitions/v1TransferOwnershipResponse"
             }
           },
           "default": {
@@ -139,114 +139,17 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/fauxstodianTransferOwnershipReq"
+              "$ref": "#/definitions/v1TransferOwnershipRequest"
             }
           }
         ],
         "tags": [
-          "Fauxstodian"
+          "FauxstodianService"
         ]
       }
     }
   },
   "definitions": {
-    "fauxstodianCloseAccountRep": {
-      "type": "object",
-      "properties": {
-        "signature": {
-          "type": "string",
-          "title": "solana tx signature"
-        }
-      }
-    },
-    "fauxstodianCloseAccountReq": {
-      "type": "object",
-      "properties": {
-        "pda": {
-          "type": "string",
-          "title": "vault record address (pda)"
-        },
-        "owner": {
-          "type": "string",
-          "title": "current owner"
-        }
-      },
-      "title": "Close account"
-    },
-    "fauxstodianCreateAccountRep": {
-      "type": "object",
-      "properties": {
-        "depositAddress": {
-          "type": "string",
-          "title": "the created vault record address (pda)"
-        }
-      }
-    },
-    "fauxstodianCreateAccountReq": {
-      "type": "object",
-      "properties": {
-        "seed": {
-          "type": "string",
-          "title": "seed string (max 32 chars)"
-        },
-        "owner": {
-          "type": "string",
-          "title": "the initial vault owner"
-        }
-      },
-      "title": "Create account"
-    },
-    "fauxstodianGetBalanceRep": {
-      "type": "object",
-      "properties": {
-        "pubKey": {
-          "type": "string",
-          "title": "the account public key (input param)"
-        },
-        "lamports": {
-          "type": "string",
-          "format": "uint64",
-          "title": "the account balance"
-        }
-      }
-    },
-    "fauxstodianGetBalanceReq": {
-      "type": "object",
-      "properties": {
-        "pubKey": {
-          "type": "string",
-          "title": "the account public key to get balance for"
-        }
-      },
-      "title": "Get balance"
-    },
-    "fauxstodianTransferOwnershipRep": {
-      "type": "object",
-      "properties": {
-        "signature": {
-          "type": "string",
-          "title": "solana tx signature"
-        }
-      }
-    },
-    "fauxstodianTransferOwnershipReq": {
-      "type": "object",
-      "properties": {
-        "pda": {
-          "type": "string",
-          "title": "vault record address (pda)"
-        },
-        "owner": {
-          "type": "string",
-          "title": "current owner"
-        },
-        "newOwner": {
-          "type": "string",
-          "title": "new owner"
-        }
-      },
-      "title": "Transfer ownership"
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -272,6 +175,103 @@
             "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1CloseAccountRequest": {
+      "type": "object",
+      "properties": {
+        "pda": {
+          "type": "string",
+          "title": "vault record address (pda)"
+        },
+        "owner": {
+          "type": "string",
+          "title": "current owner"
+        }
+      },
+      "title": "Close account"
+    },
+    "v1CloseAccountResponse": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "title": "solana tx signature"
+        }
+      }
+    },
+    "v1CreateAccountRequest": {
+      "type": "object",
+      "properties": {
+        "seed": {
+          "type": "string",
+          "title": "seed string (max 32 chars)"
+        },
+        "owner": {
+          "type": "string",
+          "title": "the initial vault owner"
+        }
+      },
+      "title": "Create account"
+    },
+    "v1CreateAccountResponse": {
+      "type": "object",
+      "properties": {
+        "depositAddress": {
+          "type": "string",
+          "title": "the created vault record address (pda)"
+        }
+      }
+    },
+    "v1GetBalanceRequest": {
+      "type": "object",
+      "properties": {
+        "pubKey": {
+          "type": "string",
+          "title": "the account public key to get balance for"
+        }
+      },
+      "title": "Get balance"
+    },
+    "v1GetBalanceResponse": {
+      "type": "object",
+      "properties": {
+        "pubKey": {
+          "type": "string",
+          "title": "the account public key (input param)"
+        },
+        "lamports": {
+          "type": "string",
+          "format": "uint64",
+          "title": "the account balance"
+        }
+      }
+    },
+    "v1TransferOwnershipRequest": {
+      "type": "object",
+      "properties": {
+        "pda": {
+          "type": "string",
+          "title": "vault record address (pda)"
+        },
+        "owner": {
+          "type": "string",
+          "title": "current owner"
+        },
+        "newOwner": {
+          "type": "string",
+          "title": "new owner"
+        }
+      },
+      "title": "Transfer ownership"
+    },
+    "v1TransferOwnershipResponse": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "title": "solana tx signature"
         }
       }
     }

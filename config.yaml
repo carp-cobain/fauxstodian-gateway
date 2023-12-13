@@ -3,15 +3,15 @@ config_version: 3
 
 http:
   rules:
-    - selector: fauxstodian.Fauxstodian.CreateAccount
+    - selector: fauxstodian.v1.FauxstodianService.CreateAccount
       post: /fauxstodian/api/v1/account
       body: "*"
-    - selector: fauxstodian.Fauxstodian.GetBalance
+    - selector: fauxstodian.v1.FauxstodianService.GetBalance
       post: /fauxstodian/api/v1/balance
       body: "*"
-    - selector: fauxstodian.Fauxstodian.TransferOwnership
+    - selector: fauxstodian.v1.FauxstodianService.TransferOwnership
       post: /fauxstodian/api/v1/transfer
       body: "*"
-    - selector: fauxstodian.Fauxstodian.CloseAccount
+    - selector: fauxstodian.v1.FauxstodianService.CloseAccount
       post: /fauxstodian/api/v1/close
       body: "*"

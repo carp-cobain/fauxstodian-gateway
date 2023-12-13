@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/grpclog"
 
-	gw "github.com/carp-cobain/fauxstodian-gateway/gen/go/fauxstodian"
+	gw "github.com/carp-cobain/fauxstodian-gateway/gen/go/fauxstodian/v1"
 )
 
 var grpcEndpoint = flag.String("grpc-endpoint", "localhost:50055", "gRPC server endpoint")
@@ -23,7 +23,7 @@ func run() error {
 	// Register gRPC server endpoint
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	if err := gw.RegisterFauxstodianHandlerFromEndpoint(ctx, mux, *grpcEndpoint, opts); err != nil {
+	if err := gw.RegisterFauxstodianServiceHandlerFromEndpoint(ctx, mux, *grpcEndpoint, opts); err != nil {
 		return err
 	}
 
