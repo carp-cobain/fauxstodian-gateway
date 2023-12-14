@@ -2,11 +2,11 @@
 // source: fauxstodian/v1/fauxstodian.proto
 
 /*
-Package v1 is a reverse proxy.
+Package fauxstodianv1 is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package v1
+package fauxstodianv1
 
 import (
 	"context"

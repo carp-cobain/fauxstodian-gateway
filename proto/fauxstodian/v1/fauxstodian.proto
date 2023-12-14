@@ -4,8 +4,6 @@ syntax = "proto3";
 
 package fauxstodian.v1;
 
-option go_package = "github.com/carp-cobain/fauxstodian-gateway/gen/go/fauxstodian/v1";
-
 // The fake Solana custodian service definition.
 service FauxstodianService {
   // Create a new vault (PDA).

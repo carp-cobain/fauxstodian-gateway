@@ -7,7 +7,7 @@
 // - protoc             (unknown)
 // source: fauxstodian/v1/fauxstodian.proto
 
-package v1
+package fauxstodianv1
 
 import (
 	context "context"
