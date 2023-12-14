@@ -7,7 +7,7 @@ A http gateway for the fauxstodian gRPC server.
 To generate code and swagger spec
 
 ```sh
-buf generate
+buf generate proto
 ```
 
 ### Build
